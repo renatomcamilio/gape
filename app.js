@@ -55,7 +55,7 @@ app.get('/', function (req, res) {
     res.send("Hello there!");
 });
 
-// error handling middleware should be loaded after the loading the routes
+// error handling middleware should be loaded after loading the routes
 if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
