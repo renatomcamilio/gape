@@ -20,7 +20,7 @@ var swig = require('swig');
 // Express app instance
 var app = express();
 
-// Swig template engine init
+// registering swig template engine
 app.engine('swig', swig.renderFile);
 
 // settings - all environments
@@ -32,20 +32,25 @@ app.set('view engine', 'swig');
 app.use(logger('dev'));
 app.use(methodOverride());
 
+/**
+ * the built-in session is not production ready
+ * we should change to a session-storage like redis or something
+ */
 app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: 'kds43ls@kds120k'
 }));
 
+// body parsing middlewares
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(multer());
 
+// mount `/public` folder for client-side resources
 app.use(express.static(path.join(__dirname, 'public')));
 
+// default route, will be in a `routes/` folder
 app.get('/', function (req, res) {
     res.send("Hello there!");
 });
