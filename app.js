@@ -21,12 +21,16 @@ var swig = require('swig');
 var app = express();
 
 // registering swig template engine
-app.engine('swig', swig.renderFile);
+app.engine('html', swig.renderFile);
 
 // settings - all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'swig');
+app.set('views', path.join(__dirname, 'server', 'view'));
+app.set('view engine', 'html');
+if ('development' == app.get('env')) {
+    app.set('view cache', false);
+    swig.setDefaults({ cache: false });
+}
 
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -51,8 +55,10 @@ app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // default route, will be in a `routes/` folder
-app.get('/', function (req, res) {
-    res.send("Hello there!");
+app.get('/:name?', function (req, res) {
+    res.render('index', {
+        name: req.params.name || 'world'
+    });
 });
 
 // error handling middleware should be loaded after loading the routes
