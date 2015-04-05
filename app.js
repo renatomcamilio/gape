@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 
 // mount `/public` folder for client-side resources
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // default route, will be in a `routes/` folder
 app.get('/:name?', function (req, res) {
