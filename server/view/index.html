@@ -12,15 +12,13 @@
 
         <link rel="stylesheet" href="/static/css/main.css">
     </head>
-    <body>
+    <body ng-app="gape">
+        <!-- ngView renders the corresponding template to current route -->
+        <div ng-view></div>
+        
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <!-- Add your site or application content here -->
-        <h3>Hello, {{ name|title }}!</h3>
-        <em>This is HTML5 Boilerplate.</em>
-        <p>We'll bootstrap your AngularJS app through this file. All the application rendering logic will be handled by AngularJS Directives! Sweet!</p>
 
         <script src="/static/js/main.js"></script>
 
