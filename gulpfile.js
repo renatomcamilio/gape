@@ -28,6 +28,8 @@ var STYLES_SRC = [
     'client/less/**/*.less'
 ];
 
+var TEMPLATE_SRC = 'client/**/*.html';
+
 /**
  * Tasks definition
  */
@@ -41,7 +43,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('template-cache', function () {
-    return gulp.src('client/**/*.html')
+    return gulp.src(TEMPLATE_SRC)
         .pipe(templateCache('template-cache.js', { standalone: true, module: 'gape.templateCache' }))
         .pipe(gulp.dest('template-cache'));
 });
@@ -52,6 +54,12 @@ gulp.task('script', ['template-cache'], function () {
         .pipe(gulp.dest('public/js'));
 });
 
+gulp.task('watch', function () {
+    gulp.watch(SCRIPT_SRC, ['script']);
+    gulp.watch(TEMPLATE_SRC, ['template-cache']);
+    gulp.watch(STYLES_SRC, ['less']);
+});
+
 
 /**
  * Run options
@@ -59,3 +67,4 @@ gulp.task('script', ['template-cache'], function () {
 
 gulp.task('build', ['less', 'script']);
 gulp.task('default', ['build']);
+gulp.task('dev', ['default', 'watch']);
