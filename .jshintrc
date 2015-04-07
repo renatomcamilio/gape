@@ -1,9 +1,8 @@
 {
     "node": true,
     "browser": true,
-    "esnext": true,
+    "esnext": false,
     "bitwise": true,
-    "curly": false,
     "eqeqeq": true,
     "latedef": true,
     "newcap": true,

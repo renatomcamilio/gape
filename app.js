@@ -8,7 +8,7 @@ var path = require('path');
 /**
  * Express Middlewares
  */
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var methodOverride = require('method-override');
 var session = require('express-session');
@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 
 // mount `/public` folder for client-side resources
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // default route, will be in a `routes/` folder
 app.get('/:name?', function (req, res) {
